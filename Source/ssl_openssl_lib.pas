@@ -805,6 +805,7 @@ function DestroySSLInterface: Boolean;
 
 var
   _X509Free: TX509Free = nil; {pf}
+  _SslLibPath: string;
 
 implementation
 
@@ -2010,6 +2011,7 @@ function InitSSLInterface: Boolean;
 var
   s: string;
   x: integer;
+  path: string;
 begin
   {pf}
   if SSLLoaded then
@@ -2030,11 +2032,12 @@ begin
       SSLLibHandle := 1;
       SSLUtilHandle := 1;
 {$ELSE}
-      SSLUtilHandle := LoadLib(DLLUtilName);
-      SSLLibHandle := LoadLib(DLLSSLName);
+      SSLUtilHandle := SafeLoadLibrary(IncludeTrailingPathDelimiter(_SslLibPath) + DLLUtilName);
+      SSLLibHandle := SafeLoadLibrary(IncludeTrailingPathDelimiter(_SslLibPath) + DLLSSLName);
+
   {$IFDEF MSWINDOWS}
       if (SSLLibHandle = 0) then
-        SSLLibHandle := LoadLib(DLLSSLName2);
+        SSLLibHandle := SafeLoadLibrary(IncludeTrailingPathDelimiter(_SslLibPath) + DLLSSLName2);
   {$ENDIF}
 {$ENDIF}
 

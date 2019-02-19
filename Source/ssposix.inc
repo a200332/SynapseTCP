@@ -241,13 +241,13 @@ const
   AF_UNSPEC       = Posix.SysSocket.AF_UNSPEC;// 0;               { unspecified }
   AF_INET         = Posix.SysSocket.AF_INET;  // 2;               { internetwork: UDP, TCP, etc. }
   AF_INET6        = Posix.SysSocket.AF_INET6; // !! 30            { Internetwork Version 6 }
-  AF_MAX          = Posix.SysSocket.AF_MAX;   // !! - variable by OS
+  //AF_MAX          = Posix.SysSocket.AF_MAX;   // !! - variable by OS
 
 { Protocol families, same as address families for now. }
   PF_UNSPEC       = AF_UNSPEC;
   PF_INET         = AF_INET;
   PF_INET6        = AF_INET6;
-  PF_MAX          = AF_MAX;
+  //PF_MAX          = AF_MAX;
 
 type
 { Structure used for manipulating linger option. }
