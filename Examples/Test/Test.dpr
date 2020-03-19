@@ -2,8 +2,10 @@ program Test;
 
 uses
   System.StartUpCopy,
+  System.IoUtils,
   FMX.Forms,
   UMain in 'UMain.pas' {frmMain},
+  ssl_openssl_lib,
   blcksock in '..\..\source\blcksock.pas',
   httpsend in '..\..\source\httpsend.pas',
   synabyte in '..\..\source\synabyte.pas',
@@ -19,7 +21,14 @@ uses
 {$R *.res}
 
 begin
+
   Application.Initialize;
+  {$ifdef mswindows}
+   _SslLibPath := 'd:/nwsc2/';
+  {$else}
+   _SslLibPath := TPath.GetDocumentsPath + '/';
+  {$endif}
+   InitSSLInterface;
   Application.CreateForm(TfrmMain, frmMain);
   Application.Run;
 end.

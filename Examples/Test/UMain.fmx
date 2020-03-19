@@ -7,6 +7,7 @@ object frmMain: TfrmMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object tbTop: TToolBar
     Size.Width = 378.000000000000000000
@@ -17,7 +18,7 @@ object frmMain: TfrmMain
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Client
       TabOrder = 0
-      Text = 'http://delphi.cz/robots.txt'
+      Text = 'https://nws.cpct.com:8888/nws'
       Margins.Left = 5.000000000000000000
       Margins.Top = 5.000000000000000000
       Margins.Right = 5.000000000000000000
@@ -95,5 +96,25 @@ object frmMain: TfrmMain
       Size.Height = 30.000000000000000000
       Size.PlatformDefault = False
     end
+  end
+  object MyMQTTClient1: TMyMQTTClient
+    ClientID = 'iostest'
+    KeepAlive = 60
+    MaxRetries = 8
+    RetryTime = 60
+    Clean = False
+    Broker = False
+    AutoSubscribe = False
+    Username = 'nwsclient'
+    Password = 'nws2013'
+    Host = 'nws.cpct.com'
+    Port = 8082
+    LocalBounce = False
+    PingInterval = 5
+    UseSSL = True
+    PassThrough = False
+    SSLLibPath = 'd:/nwsc2'
+    Left = 152
+    Top = 168
   end
 end

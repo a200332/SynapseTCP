@@ -1,4 +1,11 @@
-*.~*
 *.dcu
-__recovery
+*.7z
+*.bak
+*.vlb
+*.o
 __history
+__recovery
+Android
+iOSDevice64
+iOSSimulator
+Win32

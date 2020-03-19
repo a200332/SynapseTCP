@@ -994,7 +994,7 @@ var
   _ErrRemoveState: TErrRemoveState = nil;
   _OPENSSLaddallalgorithms: TOPENSSLaddallalgorithms = nil;
   _CRYPTOcleanupAllExData: TCRYPTOcleanupAllExData = nil;
-  _RandScreen: TRandScreen = nil;
+//  _RandScreen: TRandScreen = nil;
   _BioNew: TBioNew = nil;
   _BioFreeAll: TBioFreeAll = nil;
   _BioSMem: TBioSMem = nil;
@@ -1012,7 +1012,7 @@ var
   _i2dX509bio: Ti2dX509bio = nil;
   _d2iX509bio: Td2iX509bio = nil; {pf}
   _PEMReadBioX509: TPEMReadBioX509 = nil; {pf}
-  _SkX509PopFree: TSkX509PopFree = nil; {pf}
+//  _SkX509PopFree: TSkX509PopFree = nil; {pf}
   _i2dPrivateKeyBio: Ti2dPrivateKeyBio = nil;
 
   // 3DES functions
@@ -1096,7 +1096,7 @@ var
   procedure _ErrRemoveState(pid: integer); cdecl;external DLLUtilName name 'ERR_remove_state';
   procedure _OPENSSLaddallalgorithms; cdecl;external DLLUtilName name 'OPENSSL_add_all_algorithms_noconf';
   procedure _CRYPTOcleanupAllExData; cdecl;external DLLUtilName name 'CRYPTO_cleanup_all_ex_data';
-  procedure _RandScreen; cdecl;external DLLUtilName name 'RAND_screen';
+//  procedure _RandScreen; cdecl;external DLLUtilName name 'RAND_screen';
   function _BioNew(b: PBIO_METHOD): PBIO; cdecl;external DLLUtilName name 'BIO_new';
   procedure _BioFreeAll(b: PBIO); cdecl;external DLLUtilName name 'BIO_free_all';
   function _BioSMem: PBIO_METHOD; cdecl;external DLLUtilName name 'BIO_s_mem';
@@ -1115,7 +1115,7 @@ var
   function _d2iX509bio(b:PBIO;  x:PX509):   PX509;   cdecl; external DLLUtilName name 'd2i_X509_bio';
   function _PEMReadBioX509(b:PBIO;  {var x:PX509;}x:PSslPtr; callback:PFunction; cb_arg:SslPtr): PX509; cdecl; external DLLUtilName name 'PEM_read_bio_X509';
 {$IFNDEF MSWINDOWS}
-  procedure _SkX509PopFree(st: PSTACK; func: TSkPopFreeFunc); cdecl; external DLLUtilName name 'sk_X509_pop_free';
+//  procedure _SkX509PopFree(st: PSTACK; func: TSkPopFreeFunc); cdecl; external DLLUtilName name 'sk_X509_pop_free';
 {$ENDIF}
   function _i2dPrivateKeyBio(b: PBIO; pkey: EVP_PKEY): integer; cdecl;external DLLUtilName name 'i2d_PrivateKey_bio';
 
@@ -1658,8 +1658,8 @@ end;
 
 procedure RandScreen;
 begin
-  if InitSSLInterface {$IFNDEF STATIC}and Assigned(_RandScreen){$ENDIF} then
-    _RandScreen;
+//  if InitSSLInterface {$IFNDEF STATIC}and Assigned(_RandScreen){$ENDIF} then
+//    _RandScreen;
 end;
 
 function BioNew(b: PBIO_METHOD): PBIO;
@@ -1880,10 +1880,10 @@ end;
 
 procedure SkX509PopFree(st: PSTACK; func:TSkPopFreeFunc); {pf}
 begin
-{$IFNDEF MSWINDOWS}
-  if InitSSLInterface {$IFNDEF STATIC}and Assigned(_SkX509PopFree){$ENDIF} then
-    _SkX509PopFree(st,func);
-{$ENDIF}
+//{$IFNDEF MSWINDOWS}
+//  if InitSSLInterface {$IFNDEF STATIC}and Assigned(_SkX509PopFree){$ENDIF} then
+//    _SkX509PopFree(st,func);
+//{$ENDIF}
 end;
 
 function i2dPrivateKeyBio(b: PBIO; pkey: EVP_PKEY): integer;
@@ -2119,7 +2119,7 @@ begin
         _ErrRemoveState := GetProcAddr(SSLUtilHandle, 'ERR_remove_state');
         _OPENSSLaddallalgorithms := GetProcAddr(SSLUtilHandle, 'OPENSSL_add_all_algorithms_noconf');
         _CRYPTOcleanupAllExData := GetProcAddr(SSLUtilHandle, 'CRYPTO_cleanup_all_ex_data');
-        _RandScreen := GetProcAddr(SSLUtilHandle, 'RAND_screen');
+//        _RandScreen := GetProcAddr(SSLUtilHandle, 'RAND_screen');
         _BioNew := GetProcAddr(SSLUtilHandle, 'BIO_new');
         _BioFreeAll := GetProcAddr(SSLUtilHandle, 'BIO_free_all');
         _BioSMem := GetProcAddr(SSLUtilHandle, 'BIO_s_mem');
@@ -2137,7 +2137,7 @@ begin
         _i2dX509bio := GetProcAddr(SSLUtilHandle, 'i2d_X509_bio');
         _d2iX509bio := GetProcAddr(SSLUtilHandle, 'd2i_X509_bio'); {pf}
         _PEMReadBioX509 := GetProcAddr(SSLUtilHandle, 'PEM_read_bio_X509'); {pf}
-        _SkX509PopFree := GetProcAddr(SSLUtilHandle, 'SK_X509_POP_FREE'); {pf}
+//        _SkX509PopFree := GetProcAddr(SSLUtilHandle, 'SK_X509_POP_FREE'); {pf}
         _i2dPrivateKeyBio := GetProcAddr(SSLUtilHandle, 'i2d_PrivateKey_bio');
 
         // 3DES functions
@@ -2170,8 +2170,8 @@ begin
           _SslLoadErrorStrings;
         {$IFNDEF STATIC}if assigned(_OPENSSLaddallalgorithms) then{$ENDIF}
           _OPENSSLaddallalgorithms;
-        {$IFNDEF STATIC}if assigned(_RandScreen) then{$ENDIF}
-          _RandScreen;
+//        {$IFNDEF STATIC}if assigned(_RandScreen) then{$ENDIF}
+//          _RandScreen;
         {$IFNDEF STATIC}
         if assigned(_CRYPTOnumlocks) and assigned(_CRYPTOsetlockingcallback) then
         {$ENDIF}
@@ -2318,7 +2318,7 @@ begin
     _ErrRemoveState := nil;
     _OPENSSLaddallalgorithms := nil;
     _CRYPTOcleanupAllExData := nil;
-    _RandScreen := nil;
+//    _RandScreen := nil;
     _BioNew := nil;
     _BioFreeAll := nil;
     _BioSMem := nil;
@@ -2333,7 +2333,7 @@ begin
     _Asn1UtctimeFree := nil;
     _Asn1IntegerSet := nil;
     _Asn1IntegerGet := nil; {pf}
-    _SkX509PopFree := nil; {pf}
+//    _SkX509PopFree := nil; {pf}
     _i2dX509bio := nil;
     _i2dPrivateKeyBio := nil;
 
